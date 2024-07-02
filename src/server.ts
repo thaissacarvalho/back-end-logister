@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import express from 'express';
+// import routes from './routes/route.ts'
 
 dotenv.config();
 const dbURL = process.env.DB_HOST as string;
@@ -19,3 +20,5 @@ app.on('All include', () => {
         console.log('Servidor executando... \n Acessar http://localhost:3000');
     });
 });
+
+// app.use(routes);
