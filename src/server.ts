@@ -15,7 +15,7 @@ mongoose.connect(dbURL)
         console.log('Connected to database LOGISTER');
     }).catch((e: string) => console.log(e)); 
 
-app.on('All include', () => {
+app.on('All include!', () => {
     app.listen(PORT, () => {
         console.log('Servidor executando... \n Acessar http://localhost:3000');
     });
