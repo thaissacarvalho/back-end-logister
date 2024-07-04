@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import { checkUsername } from '../utils/checkUsername.ts';
 import { cryptPassword } from '../utils/cryptPassword.ts';
 
-export const index = async (req: Request, res: Response): Promise<void> => {
+export const index = async (req: Request, res: Response) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -12,7 +12,7 @@ export const index = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export const register = async (req: Request, res: Response): Promise<void> => {
+export const register = async (req: Request, res: Response) => {
     const { name, username, email, password } = req.body
     try {
         const usernameExists = await checkUsername(username);
@@ -39,3 +39,43 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+export const edit = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+    const { field, value } = req.body;
+
+    try {
+        let updatedUser;
+            switch (field) {
+                case 'name':
+                    updatedUser = await User.findByIdAndUpdate(userId, { name: value }, { new: true });
+                    break;
+                case 'username': {
+                    const existingUser = await checkUsername(value);
+                    if (existingUser) {
+                        return res.status(400).json({ error: 'Username já está em uso.' });
+                    }
+                    updatedUser = await User.findByIdAndUpdate(userId, { username: value }, { new: true });
+                    break;
+                }
+                case 'password': {
+                    const hashedPassword = await cryptPassword(value);
+                    updatedUser = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
+                    break;
+                }
+                default:
+                    return res.status(400).json({ error: 'Campo inválido.' });
+            }
+
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'Usuário não encontrado.' });
+            }
+
+            return res.json(updatedUser);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: `${error.message}` });
+        } else {
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+}
