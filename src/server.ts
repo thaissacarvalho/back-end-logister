@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import express from 'express';
-// import routes from './routes/route.ts'
+import route from './routes/routes';
 
 dotenv.config();
+
 const dbURL = process.env.DB_HOST as string;
 const PORT: number = 3000;
 
@@ -13,7 +14,7 @@ mongoose.connect(dbURL)
     .then(() => {
         app.emit('All include!');
         console.log('Connected to database LOGISTER');
-    }).catch((e: string) => console.log(e)); 
+    }).catch((e: string) => console.log(e));
 
 app.on('All include!', () => {
     app.listen(PORT, () => {
@@ -21,4 +22,4 @@ app.on('All include!', () => {
     });
 });
 
-// app.use(routes);
+app.use(route);

@@ -15,6 +15,7 @@ Contato para possiveis conversas em relação ao projeto ou profissionais: thais
 -------- Comandos -------- 
 
 -> npm run build - compila o ./dist 
+-> npx tsc --watch - Recompila automaticamente a cada modificação um arquivo.
 -> nodemon .dist/server.js - roda o banco de dados e server.
 
 PROJETO INICIADO EM 01/07/2024

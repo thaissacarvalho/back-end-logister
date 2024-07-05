@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "npx tsc && nodemon dist/index.js",
+    "start": "npx tsc && nodemon ./dist/server.js",
+    "dev": "nodemon dist/server.js",
     "build": "tsc",
     "clean": "tsc --build --clean"
   },

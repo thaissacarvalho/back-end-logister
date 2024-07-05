@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/User.js';
-import { checkUsername } from '../utils/checkUsername.ts';
-import { cryptPassword } from '../utils/cryptPassword.ts';
+import { checkUsername } from '../utils/checkUsername';
+import { cryptPassword } from '../utils/cryptPassword';
 
 
 const userController = {
