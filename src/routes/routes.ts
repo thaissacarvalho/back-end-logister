@@ -3,8 +3,9 @@ import userController from '../controllers/userController.js';
 
 const route = Router();
 
-route.get('/', userController.index);
-route.post('/register', userController.register);
-route.patch('/edit/:id', userController.edit);
+route.get('/api', userController.index);
+route.post('/api/register', userController.register);
+route.patch('/api/edit/:id', userController.edit);
+route.delete('/api/delete/:username', userController.delete);
 
 export default route;
