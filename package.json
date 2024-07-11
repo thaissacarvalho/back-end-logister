@@ -1,11 +1,15 @@
 {
+  "name": "logister",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "npx tsc && nodemon ./dist/server.js",
     "dev": "nodemon dist/server.js",
     "build": "tsc",
     "clean": "tsc --build --clean"
   },
-  "type": "module",
   "dependencies": {
     "@types/dotenv": "^8.2.0",
     "bcryptjs": "^2.4.3",
