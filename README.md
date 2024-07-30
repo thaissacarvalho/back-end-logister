@@ -8,14 +8,5 @@ As tecnologias principais são Typescript, Express, MongoDB e Mongoose.
 Tecnologias adicionais: Bcrypt, Body Parser, JWT, DotEnv e ESLint.
 
 Contato para possiveis conversas em relação ao projeto ou profissionais: thaissa-carvalho@outlook.com
- 
-1. ESSE README É SUJEITO A ALTERAÇÃO CONFORME A CRIAÇÃO ACONTEÇA DA APLICAÇÃO.
-2. TODO PROJETO É DE AUTORIA MINHA DESDE A IDEIA A EXECUÇÃO.
 
--------- Comandos -------- 
-
--> npm run build - compila o ./dist 
--> npx tsc --watch - Recompila automaticamente a cada modificação um arquivo.
--> nodemon .dist/server.js - roda o banco de dados e server.
-
-PROJETO INICIADO EM 01/07/2024
+PROJETO de JULHO/2024.

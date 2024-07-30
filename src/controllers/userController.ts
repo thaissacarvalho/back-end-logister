@@ -41,26 +41,26 @@ const userController = {
     },
 
     async edit(req: Request, res: Response) {
-        const { userId } = req.params;
+        const { _id } = req.params;
         const { field, value } = req.body;
 
         try {
             let updatedUser;
             switch (field) {
                 case 'name':
-                    updatedUser = await User.findByIdAndUpdate(userId, { name: value }, { new: true });
+                    updatedUser = await User.findByIdAndUpdate(_id, { name: value }, { new: true });
                     break;
                 case 'username': {
                     const existingUser = await checkUsername(value);
                     if (existingUser) {
                         return res.status(400).json({ error: 'Username já está em uso.' });
                     }
-                    updatedUser = await User.findByIdAndUpdate(userId, { username: value }, { new: true });
+                    updatedUser = await User.findByIdAndUpdate(_id, { username: value }, { new: true });
                     break;
                 }
                 case 'password': {
                     const hashedPassword = await cryptPassword(value);
-                    updatedUser = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
+                    updatedUser = await User.findByIdAndUpdate(_id, { password: hashedPassword }, { new: true });
                     break;
                 }
                 default:

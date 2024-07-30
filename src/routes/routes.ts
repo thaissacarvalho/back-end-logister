@@ -7,7 +7,7 @@ const route = Router();
 
 route.get('/api', userController.index);
 route.post('/api/register', userController.register);
-route.patch('/api/edit/:id', userController.edit);
+route.patch('/api/edit/:_id', userController.edit);
 route.delete('/api/delete/:username', userController.delete);
 route.post('api/login', authJWT, loginController.login);
 
