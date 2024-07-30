@@ -15,7 +15,6 @@ mongoose.connect(dbURL)
     }).catch((e: string) => console.log(e));
 
 const app = express();
-app.use(express.json());
 
 app.on('All include!', () => {
     app.listen(PORT, () => {
@@ -23,4 +22,5 @@ app.on('All include!', () => {
     });
 });
 
-app.use(route);
+app.use(express.json());
+app.use('/api', route);

@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import userController from '../controllers/userController.js';
-import authJWT from '../middlewares/authJWT.js';
+import { authJwt } from '../middlewares/authJWT.js';
 import loginController from '../controllers/loginController.js';
 
 const route = Router();
 
-route.get('/api', userController.index);
-route.post('/api/register', userController.register);
-route.patch('/api/edit/:_id', userController.edit);
-route.delete('/api/delete/:username', userController.delete);
-route.post('api/login', authJWT, loginController.login);
+route.get('', userController.index);
+route.post('/register', userController.register);
+route.patch('/edit/:_id', userController.edit);
+route.delete('/delete/:username', userController.delete);
+route.post('/login', authJwt, loginController);
 
 export default route;
