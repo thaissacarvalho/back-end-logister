@@ -1,27 +1,17 @@
-// services/authLogin.ts
-import User from "../models/User";
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Request, Response } from 'express';
+import { authLogin } from '../services/authLogin';
 
-dotenv.config();
-const jwtSecret = process.env.JWT_SECRET;
-if (!jwtSecret) {
-  throw new Error('JWT_SECRET não está definido. Defina a variável de ambiente.');
+const loginController = {
+    async login(req: Request, res: Response) {
+        try {
+            const { identifier, password } = req.body;
+            const token = await authLogin(identifier, password);
+            res.json({ token });
+        } catch (error:any) {
+            res.status(400).json(error.message);
+        }
+    }
 }
 
-export const authLogin = async (identifier: string, password: string) => {
-    const user = await User.findOne({ $or: [{ username: identifier }, { email: identifier }] });
-
-    if (!user) {
-        throw new Error('Invalid username/email or password');
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        throw new Error('Invalid username/email or password');
-    }
-
-    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '15d' });
-    return token;
-}
+export default loginController;
