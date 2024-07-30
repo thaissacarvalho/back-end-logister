@@ -1,20 +1,21 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import express from 'express';
-import route from './routes/routes';
+import route from './routes/routes.js';
 
 dotenv.config();
 
 const dbURL = process.env.DB_HOST as string;
 const PORT: number = 3000;
 
-const app = express();
-
 mongoose.connect(dbURL)
     .then(() => {
         app.emit('All include!');
         console.log('Connected to database LOGISTER');
     }).catch((e: string) => console.log(e));
+
+const app = express();
+app.use(express.json());
 
 app.on('All include!', () => {
     app.listen(PORT, () => {

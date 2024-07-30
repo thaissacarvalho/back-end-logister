@@ -3,7 +3,6 @@ import User from '../models/User.js';
 import { checkUsername } from '../utils/checkUsername';
 import { cryptPassword } from '../utils/cryptPassword';
 
-
 const userController = {
     async index(req: Request, res: Response) {
         try {
