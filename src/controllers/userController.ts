@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import User from '../models/User.js';
-import { checkUsername } from '../utils/checkUsername';
+import { checkEmail, checkUsername } from '../utils/checkInfo.js';
 import { cryptPassword } from '../utils/cryptPassword';
 
 const userController = {
@@ -17,10 +17,15 @@ const userController = {
         const { name, username, email, password } = req.body
         try {
             const usernameExists = await checkUsername(username);
+            const emailExists = await checkEmail(email);
             const hashedPassword = await cryptPassword(password);
 
             if (usernameExists) {
-                res.status(400).json({ message: 'Username já existe' });
+                res.status(400).json({ message: 'Username já existe.' });
+            }
+
+            if (emailExists) {
+                res.status(400).json({ message: 'Email já existe.' })
             }
 
             const newUser = new User({
