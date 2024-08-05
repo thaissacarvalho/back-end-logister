@@ -33,6 +33,6 @@ export const loginController = async (req: Request, res: Response) => {
 
     return res.status(200).json({ token });
   } catch (err) {
-    return.status(500).json('Erro no servidor.')
+    return res.status(500).json('Erro no servidor.')
   }
 };
