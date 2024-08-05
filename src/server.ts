@@ -11,7 +11,7 @@ const PORT: number = 3000;
 mongoose.connect(dbURL)
     .then(() => {
         app.emit('All include!');
-        console.log('Connected to database LOGISTER');
+        console.log('Connected to database');
     }).catch((e: string) => console.log(e));
 
 const app = express();
