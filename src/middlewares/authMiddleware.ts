@@ -13,12 +13,14 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (token == null) return res.sendStatus(401); 
+  if (!token) return res.status(401).json('Acesso negado!'); 
 
-  jwt.verify(token, jwtSecret, (err, user) => {
-    if (err) return res.sendStatus(403);
+ try {
+  jwt.verify(token, jwtSecret);
 
-    (req as any).user = user;
-    next();
-  });
+  next();
+
+ } catch (error) {
+  res.status(400).json({ message: "Token inválido!" })
+ }
 };
