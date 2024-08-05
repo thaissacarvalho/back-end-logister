@@ -2,7 +2,7 @@ import User from "../models/User";
 import { Request, Response } from "express";
 
 export const privateController = async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const id = req.params._id;
 
     const user = await User.findById(id, '-password');
 
